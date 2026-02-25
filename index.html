@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوكيز على الويب - احترافي</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcome">مرحباً بك!</h1>
+
+        <div id="auth-section">
+            <input type="email" id="email" placeholder="الإيميل">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button onclick="signup()">تسجيل</button>
+            <button onclick="login()">دخول</button>
+        </div>
+
+        <div id="settings-section" style="display:none;">
+            <div class="input-group">
+                <label>اسمك:</label>
+                <input type="text" id="username">
+            </div>
+            <div class="input-group">
+                <label>اختار لغة:</label>
+                <select id="language">
+                    <option value="العربية">العربية</option>
+                    <option value="English">English</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>اختار لون خلفية:</label>
+                <input type="color" id="bgcolor" value="#ffffff">
+            </div>
+            <button onclick="savePreferences()">حفظ الإعدادات</button>
+            <button onclick="logout()">خروج</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
