@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Chat media: only the uploader can write, any authenticated user can read
+    match /chats/{chatId}/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.size < 25 * 1024 * 1024; // 25 MB max
+    }
+
+    // Room media
+    match /rooms/{roomId}/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.size < 25 * 1024 * 1024;
+    }
+
+    // Avatars
+    match /avatars/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.size < 5 * 1024 * 1024; // 5 MB max
+    }
+  }
+}
